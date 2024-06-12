@@ -51,3 +51,27 @@
 .products__delete {
   background-color: #dc3545; 
 }
+
+  
+
+.root {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  margin-top: 32px;
+  background-color: lightgray;
+}
+
+.title {
+  color: blue;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-style: italic;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 10px;
+}

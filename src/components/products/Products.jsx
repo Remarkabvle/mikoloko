@@ -1,45 +1,29 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios";
-import { Box, Card, CardContent, CardMedia, Typography, Button, CircularProgress } from '@mui/material';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import "swiper/swiper-bundle.min.css";
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-SwiperCore.use([Navigation, Pagination]);
+import { Box, Card, CardContent, CardMedia, Typography, Button, CircularProgress, IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Model from '../model/Model'
 
 const API_URL = "https://dummyjson.com";
 
-// CustomSlider Component
-const CustomSlider = ({ images }) => {
+const NextArrow = ({ onClick }) => {
   return (
-    <Swiper
-      spaceBetween={10}
-      slidesPerView={3}
-      breakpoints={{
-        1024: { slidesPerView: 3 },
-        600: { slidesPerView: 2 },
-        0: { slidesPerView: 1 },
-      }}
-      pagination={{ clickable: true }}
-      navigation
-    >
-      {images.map((image, index) => (
-        <SwiperSlide key={index}>
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-            <CardMedia
-              component="img"
-              sx={{ width: '100%', height: '100%' }}
-              image={image}
-              alt={`Slide ${index + 1}`}
-            />
-          </Box>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <IconButton onClick={onClick} sx={{ color: 'black', position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)' }}>
+      <ArrowForwardIosIcon />
+    </IconButton>
   );
 };
 
-// Products Component
+const PrevArrow = ({ onClick }) => {
+  return (
+    <IconButton onClick={onClick} sx={{ color: 'black', position: 'absolute', top: '50%', left: 0, transform: 'translateY(-50%)' }}>
+      <ArrowBackIosNewIcon />
+    </IconButton>
+  );
+};
+
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
@@ -64,7 +48,7 @@ const Products = () => {
       });
 
     return () => {
-      setData([]); // Clean up data when the component unmounts
+      setData([]); 
     };
   }, [limit]);
 
@@ -134,7 +118,7 @@ const Products = () => {
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 200 }}>
               <CardMedia
                 component="img"
-                sx={{ width: '50%', height: 'auto', cursor: 'pointer' }}
+                sx={{ width: '100%', height: 'auto', maxWidth: '100%' }}
                 image={product.images[0]}
                 alt={product.title}
                 onClick={() => setSearchParams({ detail: product.id })}
@@ -147,36 +131,39 @@ const Products = () => {
               <Typography variant="body2" color="text.secondary">
                 {product.description}
               </Typography>
-              <Typography variant="h6" color="text.primary" sx={{ mt: 1 }}>
-                ${product.price}
-              </Typography>
+              <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
+                <Typography variant="h6" color="text.primary" sx={{ mt: 1 }}>
+                  ${product.price}
+                </Typography>
+              </Link>
             </CardContent>
           </Card>
         ))}
       </Box>
 
-      {id && detailData && (
-        <Box sx={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Box sx={{ width: '80%', backgroundColor: '#fff', padding: 2, borderRadius: '8px' }}>
-            <Button onClick={closeDetailModel} sx={{ mb: 2 }}>Close</Button>
-            {detailLoading ? (
-              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress /></Box>
-            ) : (
-              <Box>
-                <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
-                  {detailData.title}
-                </Typography>
-                <CustomSlider images={detailData.images} />
-                <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
-                  {detailData.description}
-                </Typography>
-                <Typography variant="h6" color="text.primary" sx={{ mt: 2 }}>
-                  ${detailData.price}
-                </Typography>
+      {id && (
+        <Model width={"60%"} close={closeDetailModel}>
+          {detailLoading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress /></Box>
+          ) : detailData ? (
+            <Box>
+              <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+                {detailData.title}
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
+                {detailData.description}
+              </Typography>
+              <Typography variant="h6" color="text.primary" sx={{ mt: 2 }}>
+                ${detailData.price}
+              </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+                <img src={detailData.images} alt={detailData.title} style={{ width: '100%', height: 'auto', maxWidth: '400px', maxHeight: '400px' }} />
               </Box>
-            )}
-          </Box>
-        </Box>
+            </Box>
+          ) : (
+            <Typography>No details available.</Typography>
+          )}
+        </Model>
       )}
     </Box>
   );
