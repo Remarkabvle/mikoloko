@@ -1,0 +1,33 @@
+{
+  "blogs": [
+    {
+      "id": "1",
+      "title": "Lorem ipsum 15"
+    },
+    {
+      "id": "648b",
+      "title": "Salom"
+    },
+    {
+      "id": "f5bc",
+      "title": "Hello"
+    },
+    {
+      "id": "725f",
+      "title": "HEy"
+    }
+  ],
+  "users": [],
+  "products": [
+    {
+      "id": "1",
+      "title": "Galaxy s22",
+      "price": {
+        "old": 300,
+        "new": 210
+      },
+      "category": "phone",
+      "image":"https://"
+    }
+  ]
+}

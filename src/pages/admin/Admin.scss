@@ -1,0 +1,18 @@
+.admin{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    transition: .3s;
+    &__header{
+        display: flex;
+        padding: 30px;
+        justify-content: space-between;
+    }
+}
+.admin.close{
+    grid-template-columns: 74px 1fr;
+    .sidebar__logo,
+    .sidebar__link{
+        padding: 10px;
+        gap: 24px;
+    }
+}

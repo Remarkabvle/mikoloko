@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    max-width: 1408px;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+
+/* 1440 */
+
+.container{
+    max-width: 1440px;
+    margin: 0 auto;
+    width: calc(100% - 32px);
+}

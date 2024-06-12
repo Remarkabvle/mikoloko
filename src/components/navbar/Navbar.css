@@ -1,0 +1,46 @@
+.navbar {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+}
+.navbar .MuiToolbar-root {
+  display: flex;
+  justify-content: space-between;
+}
+.navbar .navbar-left, .navbar .navbar-right {
+  display: flex;
+  gap: 15px;
+}
+.navbar .navbar-left.hide-on-mobile, .navbar .navbar-right.hide-on-mobile {
+  display: none !important;
+}
+.navbar .navbar-center {
+  display: flex;
+  justify-content: center;
+}
+.navbar .logo {
+  color: #000000;
+  text-decoration: none;
+  font-size: 20px;
+}
+.navbar .logo:hover {
+  text-decoration: none;
+  color: #000000;
+}
+.navbar .MuiButton-root {
+  color: #333333;
+}
+.navbar .MuiButton-root:hover {
+  color: #007bff;
+}
+.navbar .MuiIconButton-root {
+  color: #333333;
+}
+
+.MuiDrawer-paper {
+  background-color: #ffffff;
+}
+
+.MuiListItem-root:hover {
+  background-color: #f0f0f0;
+}
+/*# sourceMappingURL=Navbar.css.map */

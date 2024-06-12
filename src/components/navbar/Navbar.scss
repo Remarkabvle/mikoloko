@@ -1,0 +1,54 @@
+.navbar {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+
+  .MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbar-left, .navbar-right {
+    display: flex;
+    gap: 15px;
+
+    &.hide-on-mobile {
+      display: none !important;
+    }
+  }
+
+  .navbar-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo {
+    color: #000000;
+    text-decoration: none;
+    font-size: 20px;
+    &:hover {
+      text-decoration: none;
+      color: #000000;
+    }
+  }
+
+  .MuiButton-root {
+    color: #333333;
+    &:hover {
+      color: #007bff;
+    }
+  }
+
+  .MuiIconButton-root {
+    color: #333333;
+  }
+}
+
+.MuiDrawer-paper {
+  background-color: #ffffff;
+}
+
+.MuiListItem-root {
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
